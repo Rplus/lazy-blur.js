@@ -13,6 +13,10 @@ class LazyBlur {
    *         event of trigger load images
    *         'click', 'mouseover', 'scroll'
    *
+   * @param  {String}       imgLClass
+   *         className of imgL
+   *         default: 'lazy-blur__imgL'
+   *
    * @param  {Function}     callback
    *         after imgL loaded
    *         default: `addClass('done')` for imgS' parent
@@ -38,13 +42,14 @@ class LazyBlur {
 
     let appendSrcImg = (imgS) => {
       let imgL = new Image();
-      imgL.onload = () => {
-        imgS.src = imgL.src;
-        if (this.options.callback) {
+      if (this.options.callback) {
+        imgL.onload = () => {
           this.options.callback(imgS);
-        }
-      };
+        };
+      }
+      imgL.className = opt.imgLClass;
       imgL.src = this.options.getSrc(imgS);
+      imgS.parentNode.insertBefore(imgL, imgS.nextSibling);
     };
 
     if (opt.event === 'click' || opt.event === 'mouseover') {
