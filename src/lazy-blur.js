@@ -74,13 +74,13 @@ class LazyBlur {
 
     let appendSrcImg = (imgS) => {
       let imgL = new Image();
-      if (this.options.callback) {
+      if (opt.callback) {
         imgL.onload = () => {
-          this.options.callback(imgS);
+          opt.callback(imgS);
         };
       }
       imgL.className = opt.imgLClass;
-      imgL.src = this.options.getSrc(imgS);
+      imgL.src = opt.getSrc(imgS);
       imgS.parentNode.insertBefore(imgL, imgS.nextSibling);
     };
 
@@ -90,7 +90,6 @@ class LazyBlur {
       });
     }
 
-    this.options = opt;
   }
 
 }
