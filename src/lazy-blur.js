@@ -29,30 +29,31 @@ class LazyBlur {
 
     opt.imgs = [].slice.call(document.querySelectorAll(opt.imgSQuery));
 
+    // skip if no matched img
+    if (!opt.imgs.length) { return; }
+
     if (typeof opt.callback !== 'function') {
       opt.callback = false;
     }
 
-    // skip if no matched img
-    if (!opt.imgs.length) { return; }
+    let appendSrcImg = (imgS) => {
+      let imgL = new Image();
+      imgL.onload = () => {
+        imgS.src = imgL.src;
+        if (this.options.callback) {
+          this.options.callback(imgS);
+        }
+      };
+      imgL.src = this.options.getSrc(imgS);
+    };
 
     if (opt.event === 'click' || opt.event === 'mouseover') {
       opt.imgs.map(img => {
-        img.addEventListener(opt.event, () => this.appendSrcImg(img));
+        img.addEventListener(opt.event, () => appendSrcImg(img));
       });
     }
 
     this.options = opt;
   }
 
-  appendSrcImg (imgS) {
-    let imgL = new Image();
-    imgL.onload = () => {
-      imgS.src = imgL.src;
-      if (this.options.callback) {
-        this.options.callback(imgS);
-      }
-    };
-    imgL.src = this.options.getSrc(imgS);
-  }
 }
