@@ -11,7 +11,7 @@ class LazyBlur {
    *
    * @param  {String}       event
    *         event of trigger load images
-   *         'click', 'mouseover', 'scroll'
+   *         'click', 'mouseover', 'scroll' (default)
    *
    * @param  {String}       imgLClass
    *         className of imgL
@@ -38,7 +38,7 @@ class LazyBlur {
       getSrc: (imgS) => { return imgS.getAttribute('data-src'); },
       callback: (imgS) => { imgS.parentElement.className += ' done '; },
       blurSize: 20,
-      event: 'click'
+      event: 'scroll'
     }, opt);
 
     opt.imgs = [].slice.call(document.querySelectorAll(opt.imgSQuery));
@@ -84,12 +84,56 @@ class LazyBlur {
       imgS.parentNode.insertBefore(imgL, imgS.nextSibling);
     };
 
+    // events for loading img
     if (opt.event === 'click' || opt.event === 'mouseover') {
       opt.imgs.map(img => {
         img.addEventListener(opt.event, () => appendSrcImg(img));
       });
-    }
+    } else if (opt.event === 'scroll') {
+      let getImgPos = () => {
+        opt.imgsWithPos = opt.imgs.map(img => {
+          let _rect = img.getBoundingClientRect();
+          let _offsetY = window.pageYOffset;
+          return {
+            imgEl: img,
+            top: _rect.top + _offsetY,
+            bottom: _rect.bottom + _offsetY
+          };
+        });
+      };
 
+      let detectImgsAreInViewport = () => {
+        // return if all imgs loaded
+        if (!opt.imgsWithPos.length) { return; }
+
+        let _offsetY = window.pageYOffset;
+        let _vpTop = _offsetY;
+        let _vpBottom = _offsetY + window.innerHeight;
+
+        opt.imgsWithPos = opt.imgsWithPos.filter((imgData, idx) => {
+          let isInVp = (imgData.bottom < _vpBottom && imgData.bottom > _vpTop) ||
+                       (imgData.top > _vpTop && imgData.top < _vpBottom);
+
+          if (isInVp) {
+            appendSrcImg(imgData.imgEl);
+          }
+
+          return !isInVp;
+        });
+      };
+
+      getImgPos();
+      detectImgsAreInViewport();
+
+      window.addEventListener('scroll', () => {
+        detectImgsAreInViewport();
+      });
+
+      window.addEventListener('resize', () => {
+        getImgPos();
+        detectImgsAreInViewport();
+      });
+    }
   }
 
 }
