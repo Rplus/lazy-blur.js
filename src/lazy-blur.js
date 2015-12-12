@@ -13,6 +13,10 @@ class LazyBlur {
    *         event of trigger load images
    *         'click', 'mouseover', 'scroll' (default)
    *
+   * @param  {Number}       scrollThreshold
+   *         distance of scroll threshold (buffer), unit: px
+   *         default: 50
+   *
    * @param  {String}       imgLClass
    *         className of imgL
    *         default: 'lazy-blur__imgL'
@@ -38,6 +42,7 @@ class LazyBlur {
       getSrc: (imgS) => { return imgS.getAttribute('data-src'); },
       callback: (imgS) => { imgS.parentElement.className += ' done '; },
       blurSize: 20,
+      scrollThreshold: 50,
       event: 'scroll'
     }, opt);
 
@@ -107,8 +112,8 @@ class LazyBlur {
         if (!opt.imgsWithPos.length) { return; }
 
         let _offsetY = window.pageYOffset;
-        let _vpTop = _offsetY;
-        let _vpBottom = _offsetY + window.innerHeight;
+        let _vpTop = _offsetY - opt.scrollThreshold;
+        let _vpBottom = _offsetY + window.innerHeight + opt.scrollThreshold;
 
         opt.imgsWithPos = opt.imgsWithPos.filter((imgData, idx) => {
           let isInVp = (imgData.bottom < _vpBottom && imgData.bottom > _vpTop) ||
