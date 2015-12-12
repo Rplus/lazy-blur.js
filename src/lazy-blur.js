@@ -1,9 +1,9 @@
 /* global Image */
 class LazyBlur {
   /**
-   * @param  {String|Array} imgs
+   * @param  {String}       imgSQuery
    *         small imgs' className or imgs' DOM array
-   *         default: `.lazy-blur`
+   *         default: `.lazy-blur__imgS`
    *
    * @param  {Function}     getSrc
    *         function for getting imgL source url
@@ -16,14 +16,13 @@ class LazyBlur {
 
   constructor (opt = {}) {
     opt = Object.assign({
-      imgs: '.lazy-blur',
+      imgSQuery: '.lazy-blur__imgS',
+      imgLClass: 'lazy-blur__imgL',
       getSrc: (imgS) => { return imgS.getAttribute('data-src'); },
       event: 'click' // click || mouseover || scroll (defult)
     }, opt);
 
-    if (typeof opt.imgs === 'string') {
-      opt.imgs = [].slice.call(document.getElementsByClassName(opt.imgs));
-    }
+    opt.imgs = [].slice.call(document.querySelectorAll(opt.imgSQuery));
 
     // skip if no match
     if (!opt.imgs.length) { return; }
