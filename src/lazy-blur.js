@@ -12,6 +12,10 @@ class LazyBlur {
    * @param  {String}       event
    *         event of trigger load images
    *         'click', 'mouseover', 'scroll'
+   *
+   * @param  {Function}     callback
+   *         after imgL loaded
+   *         default: `addClass('done')` for imgS' parent
    */
 
   constructor (opt = {}) {
@@ -19,12 +23,17 @@ class LazyBlur {
       imgSQuery: '.lazy-blur__imgS',
       imgLClass: 'lazy-blur__imgL',
       getSrc: (imgS) => { return imgS.getAttribute('data-src'); },
-      event: 'click' // click || mouseover || scroll (defult)
+      callback: (imgS) => { imgS.parentElement.className += ' done '; },
+      event: 'click'
     }, opt);
 
     opt.imgs = [].slice.call(document.querySelectorAll(opt.imgSQuery));
 
-    // skip if no match
+    if (typeof opt.callback !== 'function') {
+      opt.callback = false;
+    }
+
+    // skip if no matched img
     if (!opt.imgs.length) { return; }
 
     if (opt.event === 'click' || opt.event === 'mouseover') {
@@ -40,6 +49,9 @@ class LazyBlur {
     let imgL = new Image();
     imgL.onload = () => {
       imgS.src = imgL.src;
+      if (this.options.callback) {
+        this.options.callback(imgS);
+      }
     };
     imgL.src = this.options.getSrc(imgS);
   }
