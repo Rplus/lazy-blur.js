@@ -9,7 +9,7 @@ class LazyBlur {
    *         function for getting imgL source url
    *         default: `function (imgS) { return imgS.getAttribute('data-src'); }`
    *
-   * @param  {String}       event
+   * @param  {String}       eventType
    *         event of trigger load images
    *         'click', 'mouseover', 'scroll' (default)
    *
@@ -43,7 +43,7 @@ class LazyBlur {
       onLoad: (imgS) => { imgS.parentElement.className += ' done '; },
       blurSize: 20,
       scrollThreshold: 50,
-      event: 'scroll'
+      eventType: 'scroll'
     }, opt);
 
     opt.imgs = [].slice.call(document.querySelectorAll(opt.imgSQuery));
@@ -90,11 +90,11 @@ class LazyBlur {
     };
 
     // events for loading img
-    if (opt.event === 'click' || opt.event === 'mouseover') {
+    if (opt.eventType === 'click' || opt.eventType === 'mouseover') {
       opt.imgs.map(img => {
-        img.addEventListener(opt.event, () => appendSrcImg(img));
+        img.addEventListener(opt.eventType, () => appendSrcImg(img));
       });
-    } else if (opt.event === 'scroll') {
+    } else if (opt.eventType === 'scroll') {
       let getImgPos = () => {
         opt.imgsWithPos = opt.imgs.map(img => {
           let _rect = img.getBoundingClientRect();
