@@ -29,7 +29,7 @@ class LazyBlur {
    *         value of svg gaussian blur filter
    *         default: 20
    *
-   * @param  {Function}     callback
+   * @param  {Function}     onLoad
    *         after imgL loaded
    *         default: `addClass('done')` for imgS' parent
    */
@@ -40,7 +40,7 @@ class LazyBlur {
       imgLClass: 'lazy-blur__imgL',
       filterSelector: 'html.svg *:not(.done) > ' + opt.imgSQuery,
       getSrc: (imgS) => { return imgS.getAttribute('data-src'); },
-      callback: (imgS) => { imgS.parentElement.className += ' done '; },
+      onLoad: (imgS) => { imgS.parentElement.className += ' done '; },
       blurSize: 20,
       scrollThreshold: 50,
       event: 'scroll'
@@ -51,8 +51,8 @@ class LazyBlur {
     // skip if no matched img
     if (!opt.imgs.length) { return; }
 
-    if (typeof opt.callback !== 'function') {
-      opt.callback = false;
+    if (typeof opt.onLoad !== 'function') {
+      opt.onLoad = false;
     }
 
     // append svg filter
@@ -79,9 +79,9 @@ class LazyBlur {
 
     let appendSrcImg = (imgS) => {
       let imgL = new Image();
-      if (opt.callback) {
+      if (opt.onLoad) {
         imgL.onload = () => {
-          opt.callback(imgS);
+          opt.onLoad(imgS);
         };
       }
       imgL.className = opt.imgLClass;
