@@ -5,7 +5,7 @@ class LazyBlur {
    *         small imgs' className or imgs' DOM array
    *         default: `.lazy-blur__imgS`
    *
-   * @param  {Function}     getSrc
+   * @param  {Function}     getImgLSrc
    *         function for getting imgL source url
    *         default: `function (imgS) { return imgS.getAttribute('data-src'); }`
    *
@@ -39,7 +39,7 @@ class LazyBlur {
       imgSQuery: '.lazy-blur__imgS',
       imgLClass: 'lazy-blur__imgL',
       filterSelector: 'html.svg *:not(.done) > ' + opt.imgSQuery,
-      getSrc: (imgS) => { return imgS.getAttribute('data-src'); },
+      getImgLSrc: (imgS) => { return imgS.getAttribute('data-src'); },
       onLoad: (imgS) => { imgS.parentElement.className += ' done '; },
       blurSize: 20,
       scrollThreshold: 50,
@@ -85,7 +85,7 @@ class LazyBlur {
         };
       }
       imgL.className = opt.imgLClass;
-      imgL.src = opt.getSrc(imgS);
+      imgL.src = opt.getImgLSrc(imgS);
       imgS.parentNode.insertBefore(imgL, imgS.nextSibling);
     };
 
