@@ -96,6 +96,9 @@ class LazyBlur {
       });
     } else if (opt.eventType === 'scroll') {
       let getImgPos = () => {
+        // return if all lazy-blur images loaded
+        if (opt.imgsWithPos && !opt.imgsWithPos.length) { return; }
+
         opt.imgsWithPos = opt.imgs.map(img => {
           let _rect = img.getBoundingClientRect();
           let _offsetY = window.pageYOffset;
