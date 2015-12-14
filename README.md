@@ -7,7 +7,7 @@ A progressive image loader library with SVG blur effect.
 ![screenshot for library effect](https://lh3.googleusercontent.com/dZisilyOaq8OEsHVn0ViEhVSXF5_dAZ-vECq5rKzltF00bxI0B7WQqFrMtDBlR3qypJgvCx0Pfkj-pl5tY3D4hdDJctntnhDCq_t0XJ2Ic78cpoBnoGEwlCv6lOs20Mw0gtkjr2iPNl_5YVI1gwUsYq1VeT6II7OrnFkjN_4D0FaT6jfqZXzrNJj_c3gsWixOER5847Cst6mhqfqf2D1NjBOPN0NK3DVmKgX9hiKYwcQzFe5XfA8KGJESUJvvJhQV2-rIl1wSiITJ8n4VDlpVf7r1qK6VneiKakKGUMopjF4Hly5KuiRomEGKuetym_qzA6ldjTr_l_7EBRwgwRvztbthQAQItsl6I1LYl84FmeEhECcKPWF6b_EbFx23XwQEFoyn150YcIi7t3IZAcivtqbdhRZV9Ovm7amcLB-AaUjOcYQJxgSwEWQEbGgxjv14dzS2bJcI5GsdvXoYx1AWeQlxE_ywZgwXeurbhcSxMF3B4xVO16k-8bmjTDTSx2vQ6mJrbCN1n1ui-_aSr6Eqy2A03mmTBOL7s2Llm2hY6BOBNXlL6JBGp9eDz13VfrC9jjX=w347-h474-no)
 
 * [Demo page](http://rplus.github.io/lazy-blur.js/demo.html)
-* [try it on jsbin](http://jsbin.com/bimiwilure/1/edit)
+* [try it on jsbin](http://jsbin.com/tuhoha/edit)
 
 ## Usage
 
