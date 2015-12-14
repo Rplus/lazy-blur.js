@@ -28,3 +28,4 @@ node_modules
 
 # sourcemap
 dist/maps
+dist/demo.html
