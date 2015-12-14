@@ -4,7 +4,7 @@
 
 A progressive image loader library with SVG blur effect.
 
-* [Demo page](http://rplus.github.io/lazy-blur.js/)
+* [Demo page](http://rplus.github.io/lazy-blur.js/demo.html)
 * [try it on plnkr](http://plnkr.co/)
 
 ## Usage
