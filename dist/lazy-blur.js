@@ -50,8 +50,8 @@ function LazyBlur() {
 
   _classCallCheck(this, LazyBlur);
 
+  opt.imgSQuery = opt.imgSQuery || '.lazy-blur__imgS';
   opt = _extends({
-    imgSQuery: '.lazy-blur__imgS',
     imgLClass: 'lazy-blur__imgL',
     filterSelector: 'html.svg *:not(.done) > ' + opt.imgSQuery,
     getImgLSrc: function getImgLSrc(imgS) {
