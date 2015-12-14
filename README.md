@@ -1,6 +1,7 @@
 # lazy-blur.js
 
-[![Join the chat at https://gitter.im/Rplus/lazy-blur.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Rplus/lazy-blur.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/lazy-blur.js) [![Join the chat at https://gitter.im/Rplus/lazy-blur.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Rplus/lazy-blur.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A progressive image loader library with SVG blur effect.
 
 * [Demo page](http://rplus.github.io/lazy-blur.js/)
