@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+html.no-js(lang="en")
+  head
+    meta(charset="UTF-8")
+    title demo for lazy-blur.js
+    meta(name="viewport", content="width=device-width")
+
+    script.
+      (function(_html) {
+        _html.className = _html.className.replace(/\bno-js\b/, ' js ');
+        _html.className += ('undefined' !== typeof window.SVGRect) ? ' svg ' : ' no-svg ';
+      })(document.documentElement);
+
+    style.
+      body {
+        max-width: 40em;
+        margin: 0 auto;
+        text-align: center;
+        background-color: #ffe;
+      }
+      .image {
+        margin: 2em 0;
+      }
+      .image-caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1px 10px;
+        text-align: right;
+        background-color: #333;
+        color: #fff;
+        opacity: .3;
+        font-style: italic;
+        font-size: smaller;
+        transition: opacity .3s;
+      }
+      .image:hover .image-caption {
+        opacity: .7;
+      }
+      .image-caption::before {
+        content: 'source: ';
+      }
+
+    style.lazy-blur-style.
+      .lazy-blur {
+        position: relative;
+        overflow: hidden;
+        margin: auto;
+      }
+      .lazy-blur img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .lazy-blur__imgL {
+        opacity: 0;
+        transition: opacity .3s;
+      }
+      .done > .lazy-blur__imgL {
+        opacity: 1;
+      }
+
+  body
+
+    -
+      var images = [
+        {
+          w: 500,
+          h: 333,
+          img: 'https://c2.staticflickr.com/4/3081/2621750099_4e10f3acd8.jpg',
+          source: 'https://www.flickr.com/photos/johnc24/2621750099/'
+        },
+        {
+          w: 500,
+          h: 310,
+          img: 'https://c2.staticflickr.com/8/7012/6672150457_420d61007d.jpg',
+          source: 'https://www.flickr.com/photos/aigle_dore/6672150457/'
+        },
+        {
+          w: 500,
+          h: 336,
+          img: 'http://farm8.staticflickr.com/7160/6672148713_4e2ab31099.jpg',
+          source: 'https://www.flickr.com/photos/aigle_dore/6672148713/'
+        },
+        {
+          w: 300,
+          h: 300,
+          img: 'https://farm1.staticflickr.com/81/225579965_9e05a3e1f8.jpg',
+          source: 'https://www.flickr.com/photos/heather0714/225579965/'
+        },
+        {
+          w: 500,
+          h: 390,
+          img: 'https://c2.staticflickr.com/2/1112/1235327221_376e878c5a.jpg',
+          source: 'https://www.flickr.com/photos/joshme17/1235327221/'
+        },
+        {
+          w: 500,
+          h: 500,
+          img: 'https://c1.staticflickr.com/9/8127/8709335767_8a64a347c9.jpg',
+          source: 'https://www.flickr.com/photos/trishhamme/8709335767/'
+        },
+        {
+          w: 412,
+          h: 500,
+          img: 'https://c1.staticflickr.com/9/8676/16191340719_4ac6e38a9e.jpg',
+          source: 'https://www.flickr.com/photos/29233640@N07/16191340719/'
+        },
+        {
+          w: 324,
+          h: 500,
+          img: 'https://c1.staticflickr.com/5/4118/4922891109_73c4b136f3.jpg',
+          source: 'https://www.flickr.com/photos/trishhamme/4922891109/'
+        },
+        {
+          w: 500,
+          h: 394,
+          img: 'https://c2.staticflickr.com/4/3206/3146819611_358b2612c2.jpg',
+          source: 'https://www.flickr.com/photos/14863785@N03/3146819611/'
+        },
+        {
+          w: 500,
+          h: 318,
+          img: 'https://c2.staticflickr.com/4/3512/3847864550_b5f8fcc789.jpg',
+          source: 'https://www.flickr.com/photos/protohiro/3847864550/'
+        },
+        {
+          w: 500,
+          h: 366,
+          img: 'https://c2.staticflickr.com/6/5544/9463567884_4ab909cc30.jpg',
+          source: 'https://www.flickr.com/photos/onepointfour/9463567884/'
+        },
+        {
+          w: 500,
+          h: 333,
+          img: 'https://farm3.staticflickr.com/2001/2328986800_72df82ea8d.jpg',
+          source: 'https://www.flickr.com/photos/forgotever/2328986800/'
+        },
+        {
+          w: 500,
+          h: 338,
+          img: 'https://c2.staticflickr.com/6/5557/15058410632_b604637fca.jpg',
+          source: 'https://www.flickr.com/photos/pagedooley/15058410632/'
+        }
+      ];
+
+    h1 demo for 
+      a(href="https://github.com/Rplus/lazy-blur.js") lazy-blur.js
+
+    p
+      | A progressive image loader library with SVG blur effect.
+
+    each image in images
+      figure.image
+        .lazy-blur(style=`max-width: ${image.w}px; max-height: ${image.h}px`)
+          .lazy-blur__placeholder(style=`padding-bottom: ${Math.floor(image.h * 1000 / image.w) / 10}%`)
+          img.lazy-blur__imgS(
+            src=image.img.replace('.jpg', '_t.jpg'),
+            data-src=image.img)
+          noscript
+            img(src=image.img)
+          figcaption.image-caption= image.source
+
+    include _forkme.jade
+
+    script(src="https://rawgit.com/Rplus/lazy-blur.js/master/dist%2Flazy-blur.min.js")
+    script.
+      new LazyBlur({
+        filterSelector: 'html.svg .lazy-blur__imgS',
+        onLoad: function (imgS) {
+          imgS.parentElement.className += ' done ';
+          setTimeout(function () { imgS.remove(); }, 1000); // avoid re-painting
+        }
+      });
+
