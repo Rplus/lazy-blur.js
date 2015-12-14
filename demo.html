@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>demo for lazy-blur.js</title>
+    <meta name="viewport" content="width=device-width"/>
+    <script>
+      (function(_html) {
+        _html.className = _html.className.replace(/\bno-js\b/, ' js ');
+        _html.className += ('undefined' !== typeof window.SVGRect) ? ' svg ' : ' no-svg ';
+      })(document.documentElement);
+      
+    </script>
+    <style>
+      body {
+        max-width: 40em;
+        margin: 0 auto;
+        text-align: center;
+        background-color: #ffe;
+      }
+      .image {
+        margin: 2em 0;
+      }
+      .image-caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1px 10px;
+        text-align: right;
+        background-color: #333;
+        color: #fff;
+        opacity: .3;
+        font-style: italic;
+        font-size: smaller;
+        transition: opacity .3s;
+      }
+      .image:hover .image-caption {
+        opacity: .7;
+      }
+      .image-caption::before {
+        content: 'source: ';
+      }
+      
+    </style>
+    <style class="lazy-blur-style">
+      .lazy-blur {
+        position: relative;
+        overflow: hidden;
+        margin: auto;
+      }
+      .lazy-blur img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .lazy-blur__imgL {
+        opacity: 0;
+        transition: opacity .3s;
+      }
+      .done > .lazy-blur__imgL {
+        opacity: 1;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <h1>demo for <a href="https://github.com/Rplus/lazy-blur.js">lazy-blur.js</a></h1>
+    <p>A progressive image loader library with SVG blur effect.</p>
+    <figure class="image">
+      <div style="max-width: 500px; max-height: 333px" class="lazy-blur">
+        <div style="padding-bottom: 66.6%" class="lazy-blur__placeholder"></div><img src="https://c2.staticflickr.com/4/3081/2621750099_4e10f3acd8_t.jpg" data-src="https://c2.staticflickr.com/4/3081/2621750099_4e10f3acd8.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://c2.staticflickr.com/4/3081/2621750099_4e10f3acd8.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/johnc24/2621750099/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 500px; max-height: 310px" class="lazy-blur">
+        <div style="padding-bottom: 62%" class="lazy-blur__placeholder"></div><img src="https://c2.staticflickr.com/8/7012/6672150457_420d61007d_t.jpg" data-src="https://c2.staticflickr.com/8/7012/6672150457_420d61007d.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://c2.staticflickr.com/8/7012/6672150457_420d61007d.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/aigle_dore/6672150457/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 500px; max-height: 336px" class="lazy-blur">
+        <div style="padding-bottom: 67.2%" class="lazy-blur__placeholder"></div><img src="http://farm8.staticflickr.com/7160/6672148713_4e2ab31099_t.jpg" data-src="http://farm8.staticflickr.com/7160/6672148713_4e2ab31099.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="http://farm8.staticflickr.com/7160/6672148713_4e2ab31099.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/aigle_dore/6672148713/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 300px; max-height: 300px" class="lazy-blur">
+        <div style="padding-bottom: 100%" class="lazy-blur__placeholder"></div><img src="https://farm1.staticflickr.com/81/225579965_9e05a3e1f8_t.jpg" data-src="https://farm1.staticflickr.com/81/225579965_9e05a3e1f8.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://farm1.staticflickr.com/81/225579965_9e05a3e1f8.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/heather0714/225579965/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 500px; max-height: 390px" class="lazy-blur">
+        <div style="padding-bottom: 78%" class="lazy-blur__placeholder"></div><img src="https://c2.staticflickr.com/2/1112/1235327221_376e878c5a_t.jpg" data-src="https://c2.staticflickr.com/2/1112/1235327221_376e878c5a.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://c2.staticflickr.com/2/1112/1235327221_376e878c5a.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/joshme17/1235327221/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 500px; max-height: 500px" class="lazy-blur">
+        <div style="padding-bottom: 100%" class="lazy-blur__placeholder"></div><img src="https://c1.staticflickr.com/9/8127/8709335767_8a64a347c9_t.jpg" data-src="https://c1.staticflickr.com/9/8127/8709335767_8a64a347c9.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://c1.staticflickr.com/9/8127/8709335767_8a64a347c9.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/trishhamme/8709335767/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 412px; max-height: 500px" class="lazy-blur">
+        <div style="padding-bottom: 121.3%" class="lazy-blur__placeholder"></div><img src="https://c1.staticflickr.com/9/8676/16191340719_4ac6e38a9e_t.jpg" data-src="https://c1.staticflickr.com/9/8676/16191340719_4ac6e38a9e.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://c1.staticflickr.com/9/8676/16191340719_4ac6e38a9e.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/29233640@N07/16191340719/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 324px; max-height: 500px" class="lazy-blur">
+        <div style="padding-bottom: 154.3%" class="lazy-blur__placeholder"></div><img src="https://c1.staticflickr.com/5/4118/4922891109_73c4b136f3_t.jpg" data-src="https://c1.staticflickr.com/5/4118/4922891109_73c4b136f3.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://c1.staticflickr.com/5/4118/4922891109_73c4b136f3.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/trishhamme/4922891109/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 500px; max-height: 394px" class="lazy-blur">
+        <div style="padding-bottom: 78.8%" class="lazy-blur__placeholder"></div><img src="https://c2.staticflickr.com/4/3206/3146819611_358b2612c2_t.jpg" data-src="https://c2.staticflickr.com/4/3206/3146819611_358b2612c2.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://c2.staticflickr.com/4/3206/3146819611_358b2612c2.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/14863785@N03/3146819611/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 500px; max-height: 318px" class="lazy-blur">
+        <div style="padding-bottom: 63.6%" class="lazy-blur__placeholder"></div><img src="https://c2.staticflickr.com/4/3512/3847864550_b5f8fcc789_t.jpg" data-src="https://c2.staticflickr.com/4/3512/3847864550_b5f8fcc789.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://c2.staticflickr.com/4/3512/3847864550_b5f8fcc789.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/protohiro/3847864550/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 500px; max-height: 366px" class="lazy-blur">
+        <div style="padding-bottom: 73.2%" class="lazy-blur__placeholder"></div><img src="https://c2.staticflickr.com/6/5544/9463567884_4ab909cc30_t.jpg" data-src="https://c2.staticflickr.com/6/5544/9463567884_4ab909cc30.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://c2.staticflickr.com/6/5544/9463567884_4ab909cc30.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/onepointfour/9463567884/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 500px; max-height: 333px" class="lazy-blur">
+        <div style="padding-bottom: 66.6%" class="lazy-blur__placeholder"></div><img src="https://farm3.staticflickr.com/2001/2328986800_72df82ea8d_t.jpg" data-src="https://farm3.staticflickr.com/2001/2328986800_72df82ea8d.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://farm3.staticflickr.com/2001/2328986800_72df82ea8d.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/forgotever/2328986800/</figcaption>
+      </div>
+    </figure>
+    <figure class="image">
+      <div style="max-width: 500px; max-height: 338px" class="lazy-blur">
+        <div style="padding-bottom: 67.6%" class="lazy-blur__placeholder"></div><img src="https://c2.staticflickr.com/6/5557/15058410632_b604637fca_t.jpg" data-src="https://c2.staticflickr.com/6/5557/15058410632_b604637fca.jpg" class="lazy-blur__imgS"/>
+        <noscript><img src="https://c2.staticflickr.com/6/5557/15058410632_b604637fca.jpg"/></noscript>
+        <figcaption class="image-caption">https://www.flickr.com/photos/pagedooley/15058410632/</figcaption>
+      </div>
+    </figure><a href="https://github.com/Rplus/lazy-blur.js" title="Fork me on GitHub" class="github-corner"><svg width="80" height="80" viewbox="0 0 250 250"><title>Fork me on GitHub</title><path d="M0 0h250v250"></path><path d="M127.4 110c-14.6-9.2-9.4-19.5-9.4-19.5 3-7 1.5-11 1.5-11-1-6.2 3-2 3-2 4 4.7 2 11 2 11-2.2 10.4 5 14.8 9 16.2" fill="currentColor" style="transform-origin:130px 110px" class="octo-arm"></path><path d="M113.2 114.3s3.6 1.6 4.7.6l15-13.7c3-2.4 6-3 8.2-2.7-8-11.2-14-25 3-41 4.7-4.4 10.6-6.4 16.2-6.4.6-1.6 3.6-7.3 11.8-10.7 0 0 4.5 2.7 6.8 16.5 4.3 2.7 8.3 6 12 9.8 3.3 3.5 6.7 8 8.6 12.3 14 3 16.8 8 16.8 8-3.4 8-9.4 11-11.4 11 0 5.8-2.3 11-7.5 15.5-16.4 16-30 9-40 .2 0 3-1 7-5.2 11l-13.3 11c-1 1 .5 5.3.8 5z" fill="currentColor" class="octo-body"></path></svg><style> .github-corner svg{position:absolute;right:0;top:0;mix-blend-mode:darken;color:#ffffff;fill:#000000;}.github-corner:hover .octo-arm{animation:octocat-wave .56s;}@keyframes octocat-wave{0%, 100%{transform:rotate(0);}20%, 60%{transform:rotate(-20deg);}40%, 80%{transform:rotate(10deg);}}</style></a>
+    <script src="https://rawgit.com/Rplus/lazy-blur.js/master/dist%2Flazy-blur.min.js"></script>
+    <script>
+      new LazyBlur({
+        filterSelector: 'html.svg .lazy-blur__imgS',
+        onLoad: function (imgS) {
+          imgS.parentElement.className += ' done ';
+          setTimeout(function () { imgS.remove(); }, 1000); // avoid re-painting
+        }
+      });
+    </script>
+  </body>
+</html>
