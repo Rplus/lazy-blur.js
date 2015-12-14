@@ -17,7 +17,12 @@ steps:
 
 ### <a name="install"></a>Install
 
-[download this script]()
+You could [download this script directly](https://github.com/Rplus/lazy-blur.js/raw/master/dist/lazy-blur.min.js)
+or [install via npm](https://www.npmjs.com/package/lazy-blur.js).
+
+```bash
+npm install lazy-blur.js
+```
 
 ```html
 <script src="lazy-blur.min.js"></script>
