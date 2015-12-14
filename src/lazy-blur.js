@@ -35,10 +35,10 @@ class LazyBlur {
    */
 
   constructor (opt = {}) {
+    opt.imgSQuery = opt.imgSQuery || '.lazy-blur__imgS';
     opt = Object.assign({
-      imgSQuery: '.lazy-blur__imgS',
       imgLClass: 'lazy-blur__imgL',
-      filterSelector: 'html.svg *:not(.done) > ' + opt.imgSQuery,
+      filterSelector: `html.svg *:not(.done) > ${opt.imgSQuery}`,
       getImgLSrc: (imgS) => { return imgS.getAttribute('data-src'); },
       onLoad: (imgS) => { imgS.parentElement.className += ' done '; },
       blurSize: 20,
