@@ -46,10 +46,11 @@ steps:
 * #### css style
 
   ```css
-  .lazy-blur__imgS {
+  .lazy-blur {
     position: relative;
+    overflow: hidden;
   }
-  .lazy-blur__imgS img {
+  .lazy-blur img {
     position: absolute;
     top: 0;
     left: 0;
