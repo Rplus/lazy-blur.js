@@ -10,6 +10,8 @@ import rename from 'gulp-rename';
 import uglify from 'gulp-uglify';
 import sourcemaps from 'gulp-sourcemaps';
 import browserSync from 'browser-sync';
+import jade from 'gulp-jade';
+import ghPages from 'gulp-gh-pages';
 
 const reload = browserSync.reload;
 
@@ -58,8 +60,22 @@ gulp.task('server', () => {
   });
 });
 
+// DEMO
+gulp.task('demo', () => {
+  return gulp.src('demo/demo.jade')
+    .pipe(plumber())
+    .pipe(jade({pretty: true}))
+    .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('demo-deploy', () => {
+  return gulp.src('./dist')
+    .pipe(ghPages());
+});
+
 gulp.task('dev', ['default'], () => {
   gulp.watch('src/lazy-blur.js', ['js', reload]);
+  gulp.watch('demo/demo.jade', ['demo', reload]);
 });
 
 gulp.task('default', ['js', 'server']);
