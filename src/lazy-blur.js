@@ -11,7 +11,7 @@ class LazyBlur {
    *
    * @param  {String}       eventType
    *         event of trigger load images
-   *         'click', 'mouseover', 'scroll' (default)
+   *         'click', 'mouseenter', 'scroll' (default)
    *
    * @param  {Number}       scrollThreshold
    *         distance of scroll threshold (buffer), unit: px
@@ -90,7 +90,7 @@ class LazyBlur {
     };
 
     // events for loading img
-    if (opt.eventType === 'click' || opt.eventType === 'mouseover') {
+    if (opt.eventType === 'click' || opt.eventType === 'mouseenter') {
       opt.imgs.map(img => {
         img.addEventListener(opt.eventType, () => appendSrcImg(img));
       });

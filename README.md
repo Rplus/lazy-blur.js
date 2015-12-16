@@ -101,7 +101,7 @@ new LazyBlur({
 |:----------------|:---------|:---------------------|:--------------------------------------------------------------------------------------------|
 | imgSQuery       | String   | `'.lazy-blur__imgS'` | query selector of small images. <br>used in `document.querySelectorAll`.                    |
 | imgLClass       | String   | `'lazy-blur__imgL'`  | class name of large images loaded by lazy-blur.js.                                          |
-| eventType       | String   | `'scroll'`           | The event to active loading large images.<br>optional: `'scroll'`, `'click'`, `'mouseover'` |
+| eventType       | String   | `'scroll'`           | The event to active loading large images.<br>optional: `'scroll'`, `'click'`, `'mouseenter'` |
 | blurSize        | Number   | `20`                 | value of svg gaussian blur filter. larger is more blurred.                                  |
 | scrollThreshold | Number   | `50`                 | distance of scroll threshold (buffer), unit: `px`                                           |
 | filterSelector  | String   | `'html.svg *:not(.done) > ' + opt.imgSQuery`                    | css selector for small images with SVG filter.   |
