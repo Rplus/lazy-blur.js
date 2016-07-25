@@ -77,6 +77,10 @@ class LazyBlur {
       return newEl;
     })());
 
+    let bindManualEvent = (e) => {
+      appendSrcImg(e.target);
+    };
+
     let appendSrcImg = (imgS) => {
       let imgL = new Image();
       if (opt.onLoad) {
@@ -87,6 +91,10 @@ class LazyBlur {
       imgL.className = opt.imgLClass;
       imgL.src = opt.getImgLSrc(imgS);
       imgS.parentNode.insertBefore(imgL, imgS.nextSibling);
+
+      if (opt.eventType !== 'scroll') {
+        imgS.removeEventListener(opt.eventType, bindManualEvent);
+      }
     };
 
     // events for loading img
@@ -94,7 +102,7 @@ class LazyBlur {
       case 'click':
       case 'mouseenter':
         opt.imgs.map(img => {
-          img.addEventListener(opt.eventType, () => appendSrcImg(img));
+          img.addEventListener(opt.eventType, bindManualEvent);
         });
         break;
 
