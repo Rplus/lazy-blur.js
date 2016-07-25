@@ -1,5 +1,5 @@
 /*!
- * lazy-blur.js 0.1.6 - Progressive image loader with SVG blur effect
+ * lazy-blur.js 0.1.7 - Progressive image loader with SVG blur effect
  * Copyright (c) 2016 Rplus - https://github.com/Rplus/lazy-blur.js
  * License: MIT
  */'use strict';
@@ -105,6 +105,58 @@ function LazyBlur() {
     }
   };
 
+  var bindScrollEvent = function bindScrollEvent() {
+    var getImgPos = function getImgPos() {
+      // return if all lazy-blur images loaded
+      if (opt.imgsWithPos && !opt.imgsWithPos.length) {
+        return;
+      }
+
+      opt.imgsWithPos = opt.imgs.map(function (img) {
+        var _rect = img.getBoundingClientRect();
+        var _offsetY = window.pageYOffset;
+        return {
+          imgEl: img,
+          top: _rect.top + _offsetY,
+          bottom: _rect.bottom + _offsetY
+        };
+      });
+    };
+
+    var detectImgsAreInViewport = function detectImgsAreInViewport() {
+      // return if all imgs loaded
+      if (!opt.imgsWithPos.length) {
+        return;
+      }
+
+      var _offsetY = window.pageYOffset;
+      var _vpTop = _offsetY - opt.scrollThreshold;
+      var _vpBottom = _offsetY + window.innerHeight + opt.scrollThreshold;
+
+      opt.imgsWithPos = opt.imgsWithPos.filter(function (imgData, idx) {
+        var isInVp = imgData.bottom < _vpBottom && imgData.bottom > _vpTop || imgData.top > _vpTop && imgData.top < _vpBottom;
+
+        if (isInVp) {
+          appendSrcImg(imgData.imgEl);
+        }
+
+        return !isInVp;
+      });
+    };
+
+    getImgPos();
+    detectImgsAreInViewport();
+
+    window.addEventListener('scroll', function () {
+      detectImgsAreInViewport();
+    });
+
+    window.addEventListener('resize', function () {
+      getImgPos();
+      detectImgsAreInViewport();
+    });
+  };
+
   // events for loading img
   switch (opt.eventType) {
     case 'click':
@@ -115,55 +167,7 @@ function LazyBlur() {
       break;
 
     case 'scroll':
-      var getImgPos = function getImgPos() {
-        // return if all lazy-blur images loaded
-        if (opt.imgsWithPos && !opt.imgsWithPos.length) {
-          return;
-        }
-
-        opt.imgsWithPos = opt.imgs.map(function (img) {
-          var _rect = img.getBoundingClientRect();
-          var _offsetY = window.pageYOffset;
-          return {
-            imgEl: img,
-            top: _rect.top + _offsetY,
-            bottom: _rect.bottom + _offsetY
-          };
-        });
-      };
-
-      var detectImgsAreInViewport = function detectImgsAreInViewport() {
-        // return if all imgs loaded
-        if (!opt.imgsWithPos.length) {
-          return;
-        }
-
-        var _offsetY = window.pageYOffset;
-        var _vpTop = _offsetY - opt.scrollThreshold;
-        var _vpBottom = _offsetY + window.innerHeight + opt.scrollThreshold;
-
-        opt.imgsWithPos = opt.imgsWithPos.filter(function (imgData, idx) {
-          var isInVp = imgData.bottom < _vpBottom && imgData.bottom > _vpTop || imgData.top > _vpTop && imgData.top < _vpBottom;
-
-          if (isInVp) {
-            appendSrcImg(imgData.imgEl);
-          }
-
-          return !isInVp;
-        });
-      };
-
-      getImgPos();
-      detectImgsAreInViewport();
-
-      window.addEventListener('scroll', function () {
-        detectImgsAreInViewport();
-      });
-
-      window.addEventListener('resize', function () {
-        getImgPos();
-        detectImgsAreInViewport();
-      });
+      bindScrollEvent();
       break;
   }
 };
