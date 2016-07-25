@@ -1,6 +1,6 @@
 /*!
- * lazy-blur.js 0.1.0 - Progressive image loader with SVG blur effect
- * Copyright (c) 2015 Rplus - https://github.com/Rplus/lazy-blur.js
+ * lazy-blur.js 0.1.5 - Progressive image loader with SVG blur effect
+ * Copyright (c) 2016 Rplus - https://github.com/Rplus/lazy-blur.js
  * License: MIT
  */'use strict';
 
@@ -22,7 +22,7 @@ var LazyBlur =
  *
  * @param  {String}       eventType
  *         event of trigger load images
- *         'click', 'mouseover', 'scroll' (default)
+ *         'click', 'mouseenter', 'scroll' (default)
  *
  * @param  {Number}       scrollThreshold
  *         distance of scroll threshold (buffer), unit: px
@@ -98,14 +98,17 @@ function LazyBlur() {
   };
 
   // events for loading img
-  if (opt.eventType === 'click' || opt.eventType === 'mouseover') {
-    opt.imgs.map(function (img) {
-      img.addEventListener(opt.eventType, function () {
-        return appendSrcImg(img);
+  switch (opt.eventType) {
+    case 'click':
+    case 'mouseenter':
+      opt.imgs.map(function (img) {
+        img.addEventListener(opt.eventType, function () {
+          return appendSrcImg(img);
+        });
       });
-    });
-  } else if (opt.eventType === 'scroll') {
-    (function () {
+      break;
+
+    case 'scroll':
       var getImgPos = function getImgPos() {
         // return if all lazy-blur images loaded
         if (opt.imgsWithPos && !opt.imgsWithPos.length) {
@@ -155,6 +158,6 @@ function LazyBlur() {
         getImgPos();
         detectImgsAreInViewport();
       });
-    })();
+      break;
   }
 };
