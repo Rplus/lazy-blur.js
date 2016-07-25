@@ -90,11 +90,15 @@ class LazyBlur {
     };
 
     // events for loading img
-    if (opt.eventType === 'click' || opt.eventType === 'mouseenter') {
+  switch (opt.eventType) {
+    case 'click':
+    case 'mouseenter':
       opt.imgs.map(img => {
         img.addEventListener(opt.eventType, () => appendSrcImg(img));
       });
-    } else if (opt.eventType === 'scroll') {
+      break;
+
+    case 'scroll':
       let getImgPos = () => {
         // return if all lazy-blur images loaded
         if (opt.imgsWithPos && !opt.imgsWithPos.length) { return; }
@@ -141,7 +145,7 @@ class LazyBlur {
         getImgPos();
         detectImgsAreInViewport();
       });
-    }
+      break;
   }
-
+  }
 }
