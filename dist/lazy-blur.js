@@ -98,14 +98,17 @@ function LazyBlur() {
   };
 
   // events for loading img
-  if (opt.eventType === 'click' || opt.eventType === 'mouseenter') {
-    opt.imgs.map(function (img) {
-      img.addEventListener(opt.eventType, function () {
-        return appendSrcImg(img);
+  switch (opt.eventType) {
+    case 'click':
+    case 'mouseenter':
+      opt.imgs.map(function (img) {
+        img.addEventListener(opt.eventType, function () {
+          return appendSrcImg(img);
+        });
       });
-    });
-  } else if (opt.eventType === 'scroll') {
-    (function () {
+      break;
+
+    case 'scroll':
       var getImgPos = function getImgPos() {
         // return if all lazy-blur images loaded
         if (opt.imgsWithPos && !opt.imgsWithPos.length) {
@@ -155,6 +158,6 @@ function LazyBlur() {
         getImgPos();
         detectImgsAreInViewport();
       });
-    })();
+      break;
   }
 };

@@ -1,6 +1,6 @@
 {
   "name": "lazy-blur.js",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Progressive image loader with SVG blur effect",
   "main": "dist/lazy-blur.min.js",
   "scripts": {
