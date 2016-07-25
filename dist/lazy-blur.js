@@ -1,5 +1,5 @@
 /*!
- * lazy-blur.js 0.1.5 - Progressive image loader with SVG blur effect
+ * lazy-blur.js 0.1.6 - Progressive image loader with SVG blur effect
  * Copyright (c) 2016 Rplus - https://github.com/Rplus/lazy-blur.js
  * License: MIT
  */'use strict';
@@ -85,6 +85,10 @@ function LazyBlur() {
     return newEl;
   })());
 
+  var bindManualEvent = function bindManualEvent(e) {
+    appendSrcImg(e.target);
+  };
+
   var appendSrcImg = function appendSrcImg(imgS) {
     var imgL = new Image();
     if (opt.onLoad) {
@@ -95,6 +99,10 @@ function LazyBlur() {
     imgL.className = opt.imgLClass;
     imgL.src = opt.getImgLSrc(imgS);
     imgS.parentNode.insertBefore(imgL, imgS.nextSibling);
+
+    if (opt.eventType !== 'scroll') {
+      imgS.removeEventListener(opt.eventType, bindManualEvent);
+    }
   };
 
   // events for loading img
@@ -102,9 +110,7 @@ function LazyBlur() {
     case 'click':
     case 'mouseenter':
       opt.imgs.map(function (img) {
-        img.addEventListener(opt.eventType, function () {
-          return appendSrcImg(img);
-        });
+        img.addEventListener(opt.eventType, bindManualEvent);
       });
       break;
 
