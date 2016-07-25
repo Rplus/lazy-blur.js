@@ -97,54 +97,54 @@ class LazyBlur {
       }
     };
 
-      let bindScrollEvent = () => {
-        let getImgPos = () => {
-          // return if all lazy-blur images loaded
-          if (opt.imgsWithPos && !opt.imgsWithPos.length) { return; }
+    let bindScrollEvent = () => {
+      let getImgPos = () => {
+        // return if all lazy-blur images loaded
+        if (opt.imgsWithPos && !opt.imgsWithPos.length) { return; }
 
-          opt.imgsWithPos = opt.imgs.map(img => {
-            let _rect = img.getBoundingClientRect();
-            let _offsetY = window.pageYOffset;
-            return {
-              imgEl: img,
-              top: _rect.top + _offsetY,
-              bottom: _rect.bottom + _offsetY
-            };
-          });
-        };
-
-        let detectImgsAreInViewport = () => {
-          // return if all imgs loaded
-          if (!opt.imgsWithPos.length) { return; }
-
+        opt.imgsWithPos = opt.imgs.map(img => {
+          let _rect = img.getBoundingClientRect();
           let _offsetY = window.pageYOffset;
-          let _vpTop = _offsetY - opt.scrollThreshold;
-          let _vpBottom = _offsetY + window.innerHeight + opt.scrollThreshold;
-
-          opt.imgsWithPos = opt.imgsWithPos.filter((imgData, idx) => {
-            let isInVp = (imgData.bottom < _vpBottom && imgData.bottom > _vpTop) ||
-                         (imgData.top > _vpTop && imgData.top < _vpBottom);
-
-            if (isInVp) {
-              appendSrcImg(imgData.imgEl);
-            }
-
-            return !isInVp;
-          });
-        };
-
-        getImgPos();
-        detectImgsAreInViewport();
-
-        window.addEventListener('scroll', () => {
-          detectImgsAreInViewport();
-        });
-
-        window.addEventListener('resize', () => {
-          getImgPos();
-          detectImgsAreInViewport();
+          return {
+            imgEl: img,
+            top: _rect.top + _offsetY,
+            bottom: _rect.bottom + _offsetY
+          };
         });
       };
+
+      let detectImgsAreInViewport = () => {
+        // return if all imgs loaded
+        if (!opt.imgsWithPos.length) { return; }
+
+        let _offsetY = window.pageYOffset;
+        let _vpTop = _offsetY - opt.scrollThreshold;
+        let _vpBottom = _offsetY + window.innerHeight + opt.scrollThreshold;
+
+        opt.imgsWithPos = opt.imgsWithPos.filter((imgData, idx) => {
+          let isInVp = (imgData.bottom < _vpBottom && imgData.bottom > _vpTop) ||
+                       (imgData.top > _vpTop && imgData.top < _vpBottom);
+
+          if (isInVp) {
+            appendSrcImg(imgData.imgEl);
+          }
+
+          return !isInVp;
+        });
+      };
+
+      getImgPos();
+      detectImgsAreInViewport();
+
+      window.addEventListener('scroll', () => {
+        detectImgsAreInViewport();
+      });
+
+      window.addEventListener('resize', () => {
+        getImgPos();
+        detectImgsAreInViewport();
+      });
+    };
 
     // events for loading img
     switch (opt.eventType) {
