@@ -169,10 +169,6 @@ html.no-js(lang="en")
     script(src="./lazy-blur.js")
     script.
       new LazyBlur({
-        filterSelector: 'html.svg .lazy-blur__imgS',
-        onLoad: function (imgS) {
-          imgS.parentElement.className += ' done ';
-          setTimeout(function () { imgS.remove(); }, 1000); // avoid re-painting
-        }
+        filterSelector: 'html.svg .lazy-blur__imgS'
       });
 
