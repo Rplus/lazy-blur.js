@@ -1,6 +1,6 @@
 /*!
  * lazy-blur.js 0.1.5 - Progressive image loader with SVG blur effect
- * Copyright (c) 2015 Rplus - https://github.com/Rplus/lazy-blur.js
+ * Copyright (c) 2016 Rplus - https://github.com/Rplus/lazy-blur.js
  * License: MIT
  */'use strict';
 
