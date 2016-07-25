@@ -11,7 +11,6 @@ import uglify from 'gulp-uglify';
 import sourcemaps from 'gulp-sourcemaps';
 import browserSync from 'browser-sync';
 import jade from 'gulp-jade';
-import ghPages from 'gulp-gh-pages';
 
 const reload = browserSync.reload;
 
@@ -66,11 +65,6 @@ gulp.task('demo', () => {
     .pipe(plumber())
     .pipe(jade({pretty: true}))
     .pipe(gulp.dest('./dist'));
-});
-
-gulp.task('demo-deploy', () => {
-  return gulp.src('./dist/*')
-    .pipe(ghPages());
 });
 
 gulp.task('dev', ['default'], () => {
