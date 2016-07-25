@@ -4,6 +4,7 @@
   "description": "Progressive image loader with SVG blur effect",
   "main": "dist/lazy-blur.min.js",
   "scripts": {
+    "dev": "gulp dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

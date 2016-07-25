@@ -55,7 +55,7 @@ gulp.task('server', () => {
       forms: false
     },
     scrollThrottle: 500,
-    startPath: './dist',
+    startPath: './dist/demo.html',
     server: ''
   });
 });
